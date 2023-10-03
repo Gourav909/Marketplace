@@ -67,10 +67,10 @@ class PropertiesController < ApplicationController
     min_size  = params[:min_size].to_i
     max_size  = params[:max_size].to_i
 
-    query = Property.joins(address: { city: :district })
+    query = Property.joins(address: { city: :districts })
       .where(
-        'city.name LIKE :search OR ' \
-        'district_name. LIKE :search OR ' \
+        'cities.name LIKE :search OR ' \
+        'districts.district_name LIKE :search OR ' \
         '(price_per_month BETWEEN :min_price AND :max_price) OR ' \
         'net_size BETWEEN :min_size AND :max_size OR ' \
         'property_type LIKE :search OR ' \
