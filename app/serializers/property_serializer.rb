@@ -3,7 +3,8 @@ class PropertySerializer < ActiveModel::Serializer
   has_one :address
 
   attribute :is_favourite do |param|
-    FavouriteProperty.where(property_id: object.id, user_id: param.instance_options[:user].id).present?
+    # FavouriteProperty.where(property_id: object.id, user_id: param.instance_options[:user].id).present?
+    FavouriteProperty.where(property_id: object.id, user_id: current_user.id).present?
   end
 
   def net_size_in_sqr_feet

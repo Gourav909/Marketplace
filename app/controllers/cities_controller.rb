@@ -1,5 +1,6 @@
 class CitiesController < ApplicationController
   def index
-    render json: City.all
+    cities = City.all
+    render json: cities, each_serializer: CitySerializer, status: :ok
   end
 end

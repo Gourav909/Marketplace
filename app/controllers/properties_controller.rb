@@ -7,6 +7,7 @@ class PropertiesController < ApplicationController
     @properties = params[:search] ? search_by_params : filters
     paginated_properties = paginatable_array(@properties)
     serialized_properties = searilzer(PropertySerializer, paginated_properties)
+
     render json: { properties: serialized_properties, meta: page_meta(paginated_properties) }
   end
 
@@ -81,13 +82,11 @@ class PropertiesController < ApplicationController
     query
   end
 
-
-
   def property_params
     params.permit(:title, :price_per_month, :no_of_rooms, :property_type, :net_size, :description, :image, address_attributes: address_params)
   end
 
   def address_params
-    [:id, :city, :district, :_destroy]
+    [:id, :city_id, :district_id, :_destroy]
   end
 end

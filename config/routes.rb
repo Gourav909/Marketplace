@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :addresses
   resources :favourite_properties
   resources :users
-  resources :city, only: %i[index]
+  resources :cities, only: %i[index]
   # resources :users
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
