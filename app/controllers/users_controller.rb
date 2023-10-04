@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
-  before_action :authenticate_user!
+  include ApplicationMethods
 
-  def index
-    if current_user.present?
-      render json: current_user, serializer: UserSerializer
-    else
-      return render json: {errors: [{message: 'User not found.'}]}, status: :unprocessable_entity
-    end
+  def get_current_user
+    render_success_response({
+      user: single_serializer.new(current_user, serializer: UserSerializer)}
+    )
   end
 end

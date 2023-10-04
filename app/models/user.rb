@@ -11,12 +11,14 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   has_many :properties, dependent: :destroy
   has_many :favourite_properties, dependent: :destroy
+  has_many :fav_properties, through: :favourite_properties, source: :property
 
   def admin?
-    type.downcase == 'admin'
+    false
   end
+
   def user?
-    type.downcase == 'user'
+    true
   end
 end
 

@@ -1,9 +1,3 @@
 class AddressSerializer < ActiveModel::Serializer
-   attributes :id
-   attribute :city_name do |object|
-      @object.city.name
-   end
-   attribute :district_name do |object|
-      @object.district.district_name
-   end
+   attributes :id, :city_name, :district_name, :city_id, :district_id
 end

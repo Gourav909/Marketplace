@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: { sessions: 'sessions' }
   resources :properties
   resources :addresses
-  resources :favourite_properties
-  resources :users
+  resources :favourite_properties, param: :property_id
+  resources :users do
+    get :get_current_user, on: :collection
+  end
   resources :cities, only: %i[index]
   # resources :users
 

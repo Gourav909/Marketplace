@@ -4,9 +4,13 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, :all
+    return unless user
 
-    unless user.admin?
+    can :manage, :all if user.admin?
+    if user.user?
+      can :read, :all
+      can :get_current_user, User
+      can [:create, :destroy, :read], FavouriteProperty
       cannot [:update, :destroy, :create], Property
     end
   end

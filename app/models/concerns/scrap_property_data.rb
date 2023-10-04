@@ -75,8 +75,9 @@ class ScrapPropertyData
           card_childrens = property_card.css("div.card-body_item").children
           net_size = card_childrens[0].text.split(' ')[0]
           mrt_station = card_childrens[2].text.split("\n").first
-
-          Property.create({ title: title, price_per_month: price, net_size: net_size, mrt_line: mrt_station, property_type: 'residential', user: Admin.first, address_attributes: { city: city, district: district} })
+          city_ = City.find_or_create_by!(name: city)
+          district_ = District.find_or_create_by!(name: district, city_id: city_.id)
+          Property.create({ title: title, price_per_month: price, net_size: net_size, mrt_line: mrt_station, property_type: 'residential', user: Admin.first, address_attributes: { city_id: city_.id, district_id: district_.id} })
         end
       end
     end
